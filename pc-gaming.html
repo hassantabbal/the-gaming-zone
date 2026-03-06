@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Master Race | The Gaming Zone</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="logo"><a href="index.html">THE <span>GAMING</span> ZONE</a></div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="pc-gaming.html" class="active">PC Gaming</a></li>
+                    <li><a href="consoles.html">Consoles</a></li>
+                    <li><a href="gaming-gear.html">Gaming Gear</a></li>
+                    <li><a href="pages/support.html">Support</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="category-banner pc-bg">
+        <div class="container">
+            <h1>PC <span>MASTER RACE</span></h1>
+            <p>Des performances ultimes avec les dernières RTX 40 Series & processeurs i9.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="shop-container">
+            <aside class="filters">
+                <h4>Filtrer par</h4>
+                <div class="filter-group">
+                    <h5>Processeur</h5>
+                    <label><input type="checkbox" class="filter-check" data-filter="i9"> Intel Core i9</label>
+                    <label><input type="checkbox" class="filter-check" data-filter="ryzen"> AMD Ryzen 9</label>
+                </div>
+                <div class="filter-group">
+                    <h5>Carte Graphique</h5>
+                    <label><input type="checkbox" class="filter-check" data-filter="rtx4090"> RTX 4090</label>
+                    <label><input type="checkbox" class="filter-check" data-filter="rtx4080"> RTX 4080</label>
+                </div>
+            </aside>
+
+            <section class="products-area">
+                <div class="grid" id="pc-product-grid">
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        // كود مخصص لتصفية منتجات الـ PC فقط عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            const pcOnly = products.filter(p => p.category === "PC");
+            renderProducts(pcOnly, 'pc-product-grid');
+        });
+    </script>
+</body>
+</html>

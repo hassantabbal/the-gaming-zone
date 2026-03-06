@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Gear & Peripherals | The Gaming Zone</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .gear-banner {
+            height: 300px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), var(--bg-dark)), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .brand-strip {
+            background: #16161d;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .brand-logo {
+            font-family: 'Orbitron';
+            color: var(--text-gray);
+            font-weight: bold;
+            font-size: 1.2rem;
+            opacity: 0.6;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .brand-logo:hover { opacity: 1; color: var(--secondary-color); }
+
+        .gear-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 40px 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">THE <span>GAMING</span> ZONE</a>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="pc-gaming.html">PC Gaming</a></li>
+                    <li><a href="consoles.html">Consoles</a></li>
+                    <li><a href="gaming-gear.html">Gaming Gear</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search gear...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="count">0</span>
+                </div>
+                <div class="user-auth">
+                    <a href="#"><i class="far fa-user"></i> Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="gear-banner">
+        <div class="container text-center">
+            <h1 class="glitch-text">PRO <span>GAMING GEAR</span></h1>
+            <p>Dominez la partie avec une précision absolue.</p>
+        </div>
+    </section>
+
+    <div class="brand-strip">
+        <span class="brand-logo" onclick="filterByBrand('Razer')">RAZER</span>
+        <span class="brand-logo" onclick="filterByBrand('Logitech')">LOGITECH</span>
+        <span class="brand-logo" onclick="filterByBrand('Corsair')">CORSAIR</span>
+        <span class="brand-logo" onclick="filterByBrand('SteelSeries')">STEELSERIES</span>
+    </div>
+
+    <main class="container">
+        <div class="shop-container">
+            <aside class="filters">
+                <div class="filter-group">
+                    <h5>Type de produit</h5>
+                    <label><input type="checkbox" onclick="filterByType('Souris')"> Souris (Mice)</label>
+                    <label><input type="checkbox" onclick="filterByType('Clavier')"> Claviers (Keyboards)</label>
+                    <label><input type="checkbox" onclick="filterByType('Casque')"> Casques (Audio)</label>
+                </div>
+                <div class="filter-group">
+                    <h5>Connectivité</h5>
+                    <label><input type="radio" name="conn"> Filaire</label>
+                    <label><input type="radio" name="conn"> Sans-fil (Wireless)</label>
+                </div>
+            </aside>
+
+            <section class="products-area">
+                <div class="gear-grid" id="gear-grid">
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gearProducts = products.filter(p => p.category === "Gear");
+            renderProducts(gearProducts, 'gear-grid');
+        });
+
+        function filterByBrand(brand) {
+            const filtered = products.filter(p => p.category === "Gear" && p.name.includes(brand));
+            renderProducts(filtered, 'gear-grid');
+        }
+        
+        function filterByType(type) {
+             const filtered = products.filter(p => p.category === "Gear" && p.name.toLowerCase().includes(type.toLowerCase()));
+             renderProducts(filtered, 'gear-grid');
+        }
+    </script>
+</body>
+</html>

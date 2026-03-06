@@ -1,0 +1,60 @@
+.product-page { padding-top: 50px; }
+
+.breadcrumb { color: var(--text-gray); margin-bottom: 30px; font-size: 0.9rem; }
+
+.product-view {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    margin-bottom: 80px;
+}
+
+.main-img img {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.thumb-list {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.thumb-list img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.thumb-list img:hover, .thumb-list img.active { opacity: 1; border: 2px solid var(--secondary-color); }
+
+.status-badge {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--secondary-color);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+}
+
+.current-price {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    display: block;
+    margin: 20px 0;
+}
+
+.technical-specs table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 30px;
+}
+
+.technical-specs tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.technical-specs td { padding: 15px; }
+.technical-specs td:first-child { color: var(--text-gray); font-weight: bold; }

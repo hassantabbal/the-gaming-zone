@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom PC Builder | The Gaming Zone</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .builder-container { display: grid; grid-template-columns: 1fr 350px; gap: 30px; padding: 50px 0; }
+        .component-list { background: var(--card-bg); border-radius: 15px; padding: 20px; }
+        .comp-item { 
+            display: flex; align-items: center; justify-content: space-between; 
+            padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .comp-info h4 { color: var(--secondary-color); font-family: 'Orbitron'; }
+        .comp-select-btn { 
+            background: #1a1a2e; border: 1px solid var(--secondary-color); 
+            color: white; padding: 8px 15px; cursor: pointer; border-radius: 5px;
+        }
+        .summary-sticky { 
+            background: var(--card-bg); padding: 25px; border-radius: 15px; 
+            height: fit-content; position: sticky; top: 100px; border: 1px solid var(--primary-color);
+        }
+        .total-price { font-size: 2rem; color: var(--primary-color); font-weight: 900; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">THE <span>GAMING</span> ZONE</a>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="pc-gaming.html">PC Gaming</a></li>
+                    <li><a href="consoles.html">Consoles</a></li>
+                    <li><a href="gaming-gear.html">Gaming Gear</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search gear...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="count">0</span>
+                </div>
+                <div class="user-auth">
+                    <a href="#"><i class="far fa-user"></i> Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="glitch-text" style="font-size: 2.5rem;">Configure Your <span>Beast</span></h1>
+        
+        <div class="builder-container">
+            <section class="component-list">
+                <div class="comp-item">
+                    <div class="comp-info">
+                        <h4>CPU (Processeur)</h4>
+                        <p id="selected-cpu">Aucun sélectionné</p>
+                    </div>
+                    <button class="comp-select-btn" onclick="openModal('cpu')">Select CPU</button>
+                </div>
+
+                <div class="comp-item">
+                    <div class="comp-info">
+                        <h4>GPU (Carte Graphique)</h4>
+                        <p id="selected-gpu">Aucun sélectionné</p>
+                    </div>
+                    <button class="comp-select-btn" onclick="openModal('gpu')">Select GPU</button>
+                </div>
+
+                <div class="comp-item">
+                    <div class="comp-info">
+                        <h4>RAM (Mémoire)</h4>
+                        <p id="selected-ram">Aucun sélectionné</p>
+                    </div>
+                    <button class="comp-select-btn" onclick="openModal('ram')">Select RAM</button>
+                </div>
+            </section>
+
+            <aside class="summary-sticky">
+                <h3>Build Summary</h3>
+                <hr style="opacity: 0.1; margin: 15px 0;">
+                <div id="build-details">
+                    </div>
+                <div class="total-price" id="total-build-price">0.00 €</div>
+                <button class="btn-main" style="width: 100%;">ADD FULL BUILD TO CART</button>
+            </aside>
+        </div>
+    </main>
+
+    <script src="js/builder.js"></script>
+</body>
+</html>

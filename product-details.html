@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Center | The Gaming Zone</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .support-hero {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(rgba(10,10,12,0.8), rgba(10,10,12,0.8)), url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200');
+            background-size: cover;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .faq-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--secondary-color);
+            transition: 0.3s;
+        }
+
+        .faq-card:hover { transform: translateY(-5px); border-left-color: var(--primary-color); }
+
+        .faq-card h4 { color: var(--text-white); margin-bottom: 10px; font-family: 'Orbitron'; font-size: 0.9rem; }
+        .faq-card p { color: var(--text-gray); font-size: 0.85rem; }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            margin: 80px 0;
+        }
+
+        .contact-info {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .info-box { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+        .info-box i { color: var(--primary-color); font-size: 1.5rem; }
+
+        .ticket-form {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .ticket-form input, .ticket-form textarea, .ticket-form select {
+            background: #0a0a0c;
+            border: 1px solid #333;
+            color: white;
+            padding: 12px;
+            border-radius: 5px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">THE <span>GAMING</span> ZONE</a>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="pc-gaming.html">PC Gaming</a></li>
+                    <li><a href="consoles.html">Consoles</a></li>
+                    <li><a href="gaming-gear.html">Gaming Gear</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search gear...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="count">0</span>
+                </div>
+                <div class="user-auth">
+                    <a href="#"><i class="far fa-user"></i> Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="support-hero">
+        <div class="container">
+            <h1 class="glitch-text">Comment pouvons-nous <span>aider?</span></h1>
+            <p>Trouvez des réponses rapides ou contactez notre équipe de support technique.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="faq-grid">
+            <div class="faq-card">
+                <h4><i class="fas fa-shipping-fast"></i> Livraison & Suivi</h4>
+                <p>Nos délais de livraison standard sont de 2 à 4 jours ouvrés en France.</p>
+            </div>
+            <div class="faq-card">
+                <h4><i class="fas fa-undo"></i> Retours & Remboursements</h4>
+                <p>Vous disposez de 14 jours pour retourner un produit s'il ne vous convient pas.</p>
+            </div>
+            <div class="faq-card">
+                <h4><i class="fas fa-shield-alt"></i> Garantie Hardware</h4>
+                <p>Tous nos PC Gaming sont garantis 2 ans avec support technique prioritaire.</p>
+            </div>
+        </div>
+
+        <div class="contact-container">
+            <aside class="contact-info">
+                <h3>Contact Info</h3>
+                <div class="info-box">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email</strong>
+                        <p>support@thegamingzone.com</p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Location</strong>
+                        <p>Paris, France - Gaming District</p>
+                    </div>
+                </div>
+                <div class="info-box">
+                    <i class="fab fa-discord"></i>
+                    <div>
+                        <strong>Discord Support</strong>
+                        <p>Join our server for 24/7 help</p>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="ticket-form">
+                <h3>Ouvrir un Ticket de Support</h3>
+                <form>
+                    <div class="input-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <input type="text" placeholder="Votre Nom">
+                        <input type="email" placeholder="Votre Email">
+                    </div>
+                    <select>
+                        <option>Sujet du ticket</option>
+                        <option>Problème Technique PC</option>
+                        <option>Question sur la commande</option>
+                        <option>Garantie & Réparation</option>
+                    </select>
+                    <textarea placeholder="Décrivez votre problème en détail..." rows="6"></textarea>
+                    <button type="submit" class="btn-main" style="width: 100%;">ENVOYER LE TICKET</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    </body>
+</html>

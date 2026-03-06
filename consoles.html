@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consoles & Handhelds | The Gaming Zone</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* تنسيق خاص بصفحة الكونسول */
+        .console-banner {
+            height: 350px;
+            background: linear-gradient(rgba(10,10,12,0.7), rgba(10,10,12,0.9)), 
+                        url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=1200');
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .brand-filters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: -30px 0 40px;
+        }
+
+        .brand-btn {
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Orbitron';
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ps-btn { background: #003791; box-shadow: 0 0 15px rgba(0, 55, 145, 0.5); }
+        .xbox-btn { background: #107c10; box-shadow: 0 0 15px rgba(16, 124, 16, 0.5); }
+        .nintendo-btn { background: #e60012; box-shadow: 0 0 15px rgba(230, 0, 18, 0.5); }
+
+        .brand-btn:hover { transform: translateY(-5px) scale(1.05); }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">THE <span>GAMING</span> ZONE</a>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="pc-gaming.html">PC Gaming</a></li>
+                    <li><a href="consoles.html">Consoles</a></li>
+                    <li><a href="gaming-gear.html">Gaming Gear</a></li>
+                    <li><a href="support.html">Support</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search gear...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="count">0</span>
+                </div>
+                <div class="user-auth">
+                    <a href="#"><i class="far fa-user"></i> Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="console-banner">
+        <div class="container">
+            <h1 class="glitch-text">NEXT-GEN <span>CONSOLES</span></h1>
+            <p>Plongez dans le futur du gaming avec les consoles les plus puissantes.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="brand-filters">
+            <button class="brand-btn ps-btn" onclick="filterByBrand('PlayStation')">
+                <i class="fab fa-playstation"></i> PlayStation
+            </button>
+            <button class="brand-btn xbox-btn" onclick="filterByBrand('Xbox')">
+                <i class="fab fa-xbox"></i> Xbox
+            </button>
+            <button class="brand-btn nintendo-btn" onclick="filterByBrand('Nintendo')">
+                <i class="fas fa-gamepad"></i> Nintendo
+            </button>
+        </div>
+
+        <div class="shop-container">
+            <aside class="filters">
+                <h4>Options</h4>
+                <div class="filter-group">
+                    <label><input type="checkbox"> Inclure les accessoires</label>
+                    <label><input type="checkbox"> Éditions Limitées</label>
+                </div>
+            </aside>
+
+            <section class="products-area">
+                <div class="product-grid" id="console-grid">
+                    </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const consoleProducts = products.filter(p => p.category === "Consoles");
+            renderProducts(consoleProducts, 'console-grid');
+        });
+
+        function filterByBrand(brand) {
+            const filtered = products.filter(p => p.category === "Consoles" && p.name.includes(brand));
+            renderProducts(filtered, 'console-grid');
+        }
+    </script>
+</body>
+</html>
