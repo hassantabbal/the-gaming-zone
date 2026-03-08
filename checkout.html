@@ -3,99 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout | The Gaming Zone</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <style>
+        :root {
+            --primary-color: #ff0055;
+            --secondary-color: #00f2ff;
+            --bg-dark: #0a0a0c;
+            --card-bg: #161625;
+            --text-gray: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
         .checkout-grid { display: grid; grid-template-columns: 1fr 400px; gap: 40px; padding: 40px 0; }
-        .checkout-form { background: var(--card-bg); padding: 30px; border-radius: 15px; }
+        .checkout-form { background: var(--card-bg); padding: 30px; border-radius: 15px; border: 1px solid #222; }
         .form-section { margin-bottom: 30px; }
         .form-section h3 { font-family: 'Orbitron'; color: var(--secondary-color); margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        
         .input-group { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px; }
+        
         input, select { 
             background: #0a0a0c; border: 1px solid #333; color: white; 
-            padding: 12px; border-radius: 5px; width: 100%;
+            padding: 12px; border-radius: 5px; width: 100%; outline: none;
+            transition: 0.3s;
         }
-        .payment-methods { display: flex; gap: 15px; margin-top: 15px; }
+        input:focus { border-color: var(--primary-color); }
+        input.error { border-color: var(--primary-color) !important; box-shadow: 0 0 5px rgba(255, 0, 85, 0.2); }
+
+        .payment-methods { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+            gap: 15px; 
+            margin-top: 15px; 
+        }
         .method { 
-            flex: 1; border: 1px solid #333; padding: 15px; text-align: center; 
+            border: 1px solid #333; padding: 15px; text-align: center; 
             border-radius: 10px; cursor: pointer; transition: 0.3s;
+            background: #1a1a2e;
         }
+        .method:hover { border-color: var(--secondary-color); }
         .method.active { border-color: var(--primary-color); background: rgba(255, 0, 85, 0.1); }
-        .method i { font-size: 1.5rem; margin-bottom: 5px; display: block; }
+        .method i { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+
+        .order-summary { position: sticky; top: 100px; height: fit-content; }
+        .summary-card { background: var(--card-bg); padding: 25px; border-radius: 15px; border: 1px solid #222; }
+        
+        .btn-main {
+            width: 100%; margin-top: 25px; height: 55px;
+            background: var(--primary-color); color: white; border: none;
+            border-radius: 8px; font-family: 'Orbitron'; font-weight: bold;
+            cursor: pointer; transition: 0.3s; text-transform: uppercase;
+        }
+        .btn-main:hover { background: #d00045; box-shadow: 0 0 20px rgba(255, 0, 85, 0.4); transform: translateY(-2px); }
+
+        .hidden { display: none; }
+
+        @media (max-width: 900px) {
+            .checkout-grid { grid-template-columns: 1fr; }
+        }
     </style>
+    
 </head>
 <body>
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">THE <span>GAMING</span> ZONE</a>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="consoles.html">Consoles</a></li>
+                    <li><a href="gaming-gear.html">Gaming Gear</a></li>
+                    <li><a href="support.html">Support</a></li>
+                    
+                </ul>
+            </nav>
+
+            
+            <div class="header-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search gear...">
+            
+                </div>
+                <a href="checkout.html" style="color: white; text-decoration: none;">
+                    <div class="cart-icon" style="cursor: pointer; position: relative;">
+                        <i class="fas fa-shopping-bag"></i> <span class="count" id="cart-count">0</span>
+                    </div>
+                </a>
+                <a href="login.html" class="login-link" style="margin-left: 15px; text-decoration: none; color: white;">
+                    <i class="fas fa-user"></i> Login
+                </a>
+            </div>
+        </div>
+        
+    </header>
 
     <main class="container">
-        <h1 class="glitch-text" style="font-size: 2.5rem;">Secure <span>Checkout</span></h1>
+        <h1 style="font-family: 'Orbitron'; font-size: 2.5rem; text-align: center;">SECURE <span style="color: var(--primary-color);">CHECKOUT</span></h1>
         
         <div class="checkout-grid">
             <section class="checkout-form">
-                <div class="form-section">
-                    <h3><i class="fas fa-truck"></i> Shipping Details</h3>
-                    <div class="input-group">
-                        <input type="text" placeholder="Prénom">
-                        <input type="text" placeholder="Nom">
-                    </div>
-                    <input type="email" placeholder="Email Address" style="margin-bottom: 15px;">
-                    <input type="text" placeholder="Adresse complète">
-                    <div class="input-group" style="margin-top: 15px;">
-                        <input type="text" placeholder="Ville">
-                        <input type="text" placeholder="Code Postal">
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <h3><i class="fas fa-credit-card"></i> Payment Method</h3>
-                    <div class="payment-methods">
-                        <div class="method active">
-                            <i class="fab fa-cc-visa"></i>
-                            <span>Card</span>
-                        </div>
-                        <div class="method">
-                            <i class="fab fa-paypal"></i>
-                            <span>PayPal</span>
-                        </div>
-                        <div class="method">
-                            <i class="fas fa-wallet"></i>
-                            <span>Crypto</span>
-                        </div>
-                    </div>
-                    <div class="card-details" style="margin-top: 20px;">
-                        <input type="text" placeholder="Card Number" style="margin-bottom: 15px;">
+                <form id="checkout-form-element">
+                    <div class="form-section">
+                        <h3><i class="fas fa-truck"></i> Détails de Livraison</h3>
                         <div class="input-group">
-                            <input type="text" placeholder="MM / YY">
-                            <input type="text" placeholder="CVC">
+                            <input type="text" id="fname" placeholder="Prénom" required>
+                            <input type="text" id="lname" placeholder="Nom" required>
+                        </div>
+                        <input type="email" id="email" placeholder="Adresse Email" style="margin-bottom: 15px;">
+                        <input type="text" id="address" placeholder="Adresse de livraison (Rue, Appartement...)" required>
+                        <div class="input-group" style="margin-top: 15px;">
+                            <input type="text" id="city" placeholder="Gouvernorat (Ex: Tunis)" required>
+                            <input type="text" id="zip" placeholder="Code Postal">
+                        </div>
+                        <input type="text" id="phone" placeholder="Numéro de Téléphone" style="margin-top: 15px;" required>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-credit-card"></i> Mode de Paiement</h3>
+                        <div class="payment-methods">
+                            <div class="method active" onclick="selectMethod('card', this)">
+                                <i class="fab fa-cc-visa"></i>
+                                <span>Carte</span>
+                            </div>
+                            <div class="method" onclick="selectMethod('cod', this)">
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <span>À la livraison</span>
+                            </div>
+                            <div class="method" onclick="selectMethod('crypto', this)">
+                                <i class="fab fa-bitcoin"></i>
+                                <span>Crypto</span>
+                            </div>
+                        </div>
+
+                        <div id="card-details-area" class="card-details" style="margin-top: 25px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                            <input type="text" id="card-num" placeholder="Numéro de la Carte" style="margin-bottom: 15px;">
+                            <div class="input-group">
+                                <input type="text" id="card-date" placeholder="MM / YY">
+                                <input type="text" id="card-cvc" placeholder="CVC">
+                            </div>
+                        </div>
+
+                        <div id="cod-message" class="hidden" style="margin-top: 25px; padding: 20px; border: 1px dashed var(--secondary-color); border-radius: 10px; color: var(--secondary-color);">
+                            <i class="fas fa-info-circle"></i> Vous payerez en espèces (Cash) lors de la réception de votre commande.
                         </div>
                     </div>
-                </div>
+                </form>
             </section>
 
             <aside class="order-summary">
-                <div style="background: var(--card-bg); padding: 25px; border-radius: 15px;">
-                    <h3>Your Order</h3>
+                <div class="summary-card">
+                    <h3 style="font-family: 'Orbitron'; margin-bottom: 20px;">Votre Commande</h3>
                     <hr style="opacity: 0.1; margin: 15px 0;">
-                    <div class="summary-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <span>PS5 Console x1</span>
-                        <span>499.00 €</span>
+                    
+                    <div style="display: flex; justify-content: space-between; color: #a0a0a0; margin-bottom: 10px;">
+                        <span>Sous-total:</span>
+                        <span id="subtotal-display">0.000 TND</span>
                     </div>
-                    <div class="summary-item" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <span>Shipping</span>
-                        <span style="color: #00ff00;">Free</span>
+                    <div style="display: flex; justify-content: space-between; color: #ff0055; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px;">
+                        <span>Livraison:</span>
+                        <span id="shipping-fee">7.000 TND</span>
                     </div>
-                    <div class="summary-total" style="font-size: 1.5rem; color: var(--primary-color); margin-top: 20px; font-weight: bold;">
-                        <span>Total: 499.00 €</span>
+                    <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; font-family: 'Orbitron'; color: var(--secondary-color);">
+                        <span>TOTAL:</span>
+                        <span id="total-display">0.000 TND</span>
                     </div>
-                    <button class="btn-main" style="width: 100%; margin-top: 25px; height: 50px;">
-                        CONFIRM ORDER <i class="fas fa-lock"></i>
+
+                    <button type="button" class="btn-main" id="confirm-btn">
+                        CONFIRMER LA COMMANDE <i class="fas fa-check-circle"></i>
                     </button>
-                    <p style="font-size: 0.7rem; color: var(--text-gray); text-align: center; margin-top: 15px;">
-                        <i class="fas fa-shield-alt"></i> SSL Encrypted & Secure Payment
-                    </p>
+
+                    <div style="font-size: 0.75rem; color: var(--text-gray); text-align: center; margin-top: 20px; line-height: 1.4;">
+                        <p><i class="fas fa-shield-alt"></i> Paiement 100% Sécurisé</p>
+                        <p>Service client: +216 27135592</p>
+                    </div>
                 </div>
             </aside>
         </div>
     </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // جلب المجموع الكلي المحفوظ (الذي يتضمن الـ 7 دت من صفحة المتجر)
+            const finalTotal = parseFloat(localStorage.getItem('totalPrice')) || 0;
+            
+            const subtotalDisplay = document.getElementById('subtotal-display');
+            const totalDisplay = document.getElementById('total-display');
+
+            if (finalTotal > 7) { // إذا كان هناك سلع (أكبر من سعر التوصيل)
+                const subtotal = finalTotal - 7;
+                subtotalDisplay.innerText = subtotal.toFixed(3) + " TND";
+                totalDisplay.innerText = finalTotal.toFixed(3) + " TND";
+            } else if (finalTotal === 7) { 
+                // حالة نادرة: السلة فارغة لكن التوصيل محسوب (يجب تصفيره)
+                subtotalDisplay.innerText = "0.000 TND";
+                totalDisplay.innerText = "0.000 TND";
+            } else {
+                subtotalDisplay.innerText = "0.000 TND";
+                totalDisplay.innerText = "Panier Vide";
+            }
+        });
+
+        // إدارة طرق الدفع
+        let currentMethod = 'card';
+        function selectMethod(method, element) {
+            currentMethod = method;
+            document.querySelectorAll('.method').forEach(m => m.classList.remove('active'));
+            element.classList.add('active');
+            const cardArea = document.getElementById('card-details-area');
+            const codMessage = document.getElementById('cod-message');
+            if (method === 'cod') {
+                cardArea.classList.add('hidden');
+                codMessage.classList.remove('hidden');
+            } else {
+                cardArea.classList.remove('hidden');
+                codMessage.classList.add('hidden');
+            }
+        }
+
+        // تأكيد الطلب
+        document.getElementById('confirm-btn').addEventListener('click', function() {
+            const requiredInputs = document.querySelectorAll('#checkout-form-element input[required]');
+            let isValid = true;
+
+            requiredInputs.forEach(input => {
+                if (input.value.trim() === "") {
+                    isValid = false;
+                    input.classList.add('error');
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            if (currentMethod === 'card') {
+                const cardInputs = [document.getElementById('card-num'), document.getElementById('card-date'), document.getElementById('card-cvc')];
+                cardInputs.forEach(input => {
+                    if (input.value.trim() === "") { isValid = false; input.classList.add('error'); }
+                    else { input.classList.remove('error'); }
+                });
+            }
+
+            if (!isValid) {
+                alert("⚠️ Veuillez remplir tous les champs obligatoires.");
+                return;
+            }
+
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Traitement...';
+            this.disabled = true;
+
+            setTimeout(() => {
+                alert("🎉 Succès ! Votre commande a été enregistrée.");
+                localStorage.removeItem('totalPrice');
+                localStorage.removeItem('userCart');
+                window.location.href = "index.html"; 
+            }, 2000);
+        });
+    </script>
 </body>
 </html>

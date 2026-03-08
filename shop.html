@@ -6,62 +6,222 @@
     <title>Store | The Gaming Zone</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    
     <style>
         :root {
             --primary-color: #ff0055;
             --secondary-color: #00f2ff;
+            --bg-dark: #0a0a0c;
             --card-bg: #161625;
             --text-gray: #a0a0a0;
+            --transition: 0.3s ease;
         }
 
-        .shop-container { display: grid; grid-template-columns: 280px 1fr; gap: 30px; padding: 40px 5%; }
-        
-        /* Sidebar Filters */
-        .filters { background: var(--card-bg); padding: 25px; border-radius: 15px; height: fit-content; position: sticky; top: 100px; }
-        .filter-group { margin-bottom: 25px; }
-        .filter-group h4 { font-family: 'Orbitron'; margin-bottom: 15px; color: var(--secondary-color); font-size: 0.9rem; text-transform: uppercase; }
-        .filter-group label { display: block; margin-bottom: 10px; color: var(--text-gray); cursor: pointer; transition: 0.3s; }
-        .filter-group label:hover { color: white; }
-        .filter-group input[type="checkbox"] { margin-right: 10px; accent-color: var(--primary-color); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Top Filter Buttons */
-        .filter-buttons { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .filter-btn { 
-            background: #1a1a1a; color: white; border: 1px solid var(--primary-color); 
-            padding: 8px 18px; border-radius: 20px; cursor: pointer; transition: 0.3s; font-family: 'Poppins';
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
         }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary-color); box-shadow: 0 0 10px var(--primary-color); }
 
-        .shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
-        .section-title { text-align: center; margin-top: 40px; font-family: 'Orbitron'; }
+        /* --- Header Styling --- */
+        .main-header {
+            background: rgba(10, 10, 12, 0.95);
+            padding: 20px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-family: 'Orbitron'; font-size: 1.5rem; font-weight: bold; }
+        .logo span { color: var(--primary-color); }
+        .logo a { text-decoration: none; color: white; }
+
+        .nav-menu ul { display: flex; list-style: none; gap: 20px; }
+        .nav-menu a { color: white; text-decoration: none; font-size: 0.9rem; transition: var(--transition); }
+        .nav-menu a:hover { color: var(--secondary-color); }
+
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.2rem; }
+        .cart-icon .count {
+            position: absolute; top: -10px; right: -10px;
+            background: var(--primary-color);
+            font-size: 0.7rem; padding: 2px 6px; border-radius: 50%;
+        }
+
+        /* --- Layout --- */
+        .section-title { text-align: center; margin: 40px 0; font-family: 'Orbitron'; font-size: 2rem; }
         .section-title span { color: var(--primary-color); }
+
+        .shop-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            padding: 0 5% 50px;
+        }
+
+        /* --- Sidebar Filters --- */
+        .filters {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            border: 1px solid #222;
+        }
+
+        .filter-group { margin-bottom: 30px; }
+        .filter-group h4 { font-family: 'Orbitron'; margin-bottom: 15px; color: var(--secondary-color); font-size: 0.8rem; letter-spacing: 1px; }
+
+        .category-links { display: flex; flex-direction: column; gap: 10px; }
         
-        #product-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
+        .filter-btn {
+            background: #1a1a1a; color: white; border: 1px solid #333;
+            padding: 10px; border-radius: 8px; cursor: pointer; transition: var(--transition);
+            text-align: left; font-family: 'Poppins'; font-size: 0.85rem;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--primary-color);
+            background: rgba(255, 0, 85, 0.1);
+            color: var(--primary-color);
+        }
+
+        #price-filter { accent-color: var(--primary-color); cursor: pointer; }
+
+        /* --- Products Grid --- */
+        .shop-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #222;
+        }
+
+        .sort-select {
+            background: #1a1a2e; color: white; border: 1px solid #333;
+            padding: 5px 10px; border-radius: 5px; outline: none;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        /* --- Product Card --- */
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(255, 0, 85, 0.1);
+        }
+
+        .product-img { width: 100%; height: 200px; background: #000; overflow: hidden; }
+        .product-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+
+        .product-info { padding: 20px; }
+        .category-tag {
+            color: var(--secondary-color);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .product-info h3 { font-family: 'Orbitron'; font-size: 1rem; margin-bottom: 10px; height: 2.4em; overflow: hidden; }
+        .specs { color: var(--text-gray); font-size: 0.8rem; margin-bottom: 15px; height: 3em; }
+
+        .price-row { display: flex; justify-content: space-between; align-items: center; }
+        .price { color: white; font-weight: 700; font-size: 1.1rem; }
+        
+        .add-btn {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        .add-btn:hover { background: var(--primary-color); color: white; box-shadow: 0 0 10px var(--primary-color); }
+
+        .pay-now-btn {
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-family: 'Orbitron';
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+        }
+        .pay-now-btn:hover { box-shadow: 0 0 15px var(--primary-color); transform: scale(1.05); }
+
+        .cart-footer {
+            background: var(--card-bg);
+            padding: 30px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 2px solid var(--primary-color);
+            margin-top: 50px;
+        }
+        .total-info { font-family: 'Orbitron'; font-size: 1.2rem; }
+        .total-info #total-amount { color: var(--secondary-color); margin-left: 10px; }
+
+        .checkout-btn {
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-family: 'Orbitron';
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .checkout-btn:hover { box-shadow: 0 0 20px var(--primary-color); letter-spacing: 1px; }
+
+        @media (max-width: 900px) {
+            .shop-container { grid-template-columns: 1fr; }
+            .cart-footer { flex-direction: column; gap: 20px; text-align: center; }
+        }
     </style>
 </head>
 <body>
+
     <header class="main-header">
-        <div class="container">
-            <div class="logo"><a href="index.html">THE <span>GAMING</span> ZONE</a></div>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="#pc">PC Gaming</a></li>
-                    <li><a href="#consoles">Consoles</a></li>
-                    <li><a href="#gear">Gaming Gear</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <div class="search-bar">
-                    <input type="text" id="main-search" placeholder="Search gear...">
-                    <button><i class="fas fa-search"></i></button>
-                </div>
-                <div class="cart-icon">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="count" id="cart-count">0</span>
-                </div>
+        <div class="logo"><a href="index.html">THE <span>GAMING</span> ZONE</a></div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="shop.html" style="color: var(--primary-color);">Shop</a></li>
+                <li><a href="consoles.html">Consoles</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="count" id="cart-count">0</span>
             </div>
+            <a href="checkout.html" class="pay-now-btn"><i class="fas fa-credit-card"></i> PAYER</a>
         </div>
     </header>
 
@@ -69,221 +229,182 @@
 
     <div class="shop-container">
         <aside class="filters">
-            <h3>Filters <i class="fas fa-filter"></i></h3>
-            <hr style="opacity: 0.1; margin: 15px 0;">
             <div class="filter-group">
                 <h4>Price Range</h4>
-                <input type="range" id="price-filter" min="0" max="1000" step="50" style="width: 100%;">
+                <input type="range" id="price-filter" min="0" max="1000" step="10" value="1000" style="width: 100%;">
                 <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 10px;">
-                    <span>0 €</span>
-                    <span id="price-val">1000 €</span>
+                    <span>0 TND</span>
+                    <span id="price-val">1000 TND</span>
                 </div>
             </div>
+
             <div class="filter-group">
-                <h4>Quick Categories</h4>
+                <h4>Catégories</h4>
                 <div class="category-links">
-                    <button class="filter-btn active" onclick="filterByCategory('ALL', this)">Tout</button>
-                    <button class="filter-btn" onclick="filterByCategory('AUDIO', this)">Audio</button>
-                    <button class="filter-btn" onclick="filterByCategory('GEAR', this)">Gear</button>
-                    <button class="filter-btn" onclick="filterByCategory('CONSOLES', this)">Consoles</button>
+                    <button class="filter-btn active" data-cat="ALL">Tout</button>
+                    <button class="filter-btn" data-cat="AUDIO">Audio</button>
+                    <button class="filter-btn" data-cat="GEAR">Gear</button>
+                    <button class="filter-btn" data-cat="CONSOLES">Consoles</button>
+                    <button class="filter-btn" data-cat="ACCESSORIES">Accessoires</button>
                 </div>
             </div>
+            
+            <button onclick="clearCart()" style="width:100%; background:#333; color:#fff; border:none; padding:10px; border-radius:5px; cursor:pointer; font-size:0.8rem;">
+                <i class="fas fa-trash"></i> Vider le Panier
+            </button>
         </aside>
 
         <main class="shop-content">
             <div class="shop-header">
-                <p>Showing <span id="product-count">0</span> Products</p>
-                <select class="sort-select" onchange="sortProducts(this.value)">
-                    <option value="new">Sort by: Newest</option>
-                    <option value="low">Price: Low to High</option>
-                    <option value="high">Price: High to Low</option>
+                <p>Affichage de <span id="product-count">0</span> produits</p>
+                <select class="sort-select" id="sort-logic">
+                    <option value="default">Trier par: Par défaut</option>
+                    <option value="low">Prix: Croissant</option>
+                    <option value="high">Prix: Décroissant</option>
                 </select>
             </div>
-
-            <div class="product-grid" id="product-list">
-                </div>
+            <div class="product-grid" id="product-list"></div>
         </main>
     </div>
 
-    <script >const products = [
-        // --- 1. CONSOLES & CONTROLLERS (أجهزة التحكم والكونسول) ---
-      { id: 1, name: "PS4 Slim 500GB",     category: "CONSOLES",     price: "850 TND",     image: "ps4.webp",     desc: "Console Noire + 1 Manette DualShock 4 (État Propre)" },
-        {    id: 2,    name: "PS3 Super Slim",    category: "CONSOLES",    price: "380 TND",    image: "ps3.webp",    desc: "Système Classique 250GB + Jeux Installés"},
-        {     id: 3,     name: "DualShock 4 Black",     category: "ACCESSORIES",     price: "165 TND",     image: "man4.webp",     desc: "Manette Sans Fil Originale v2" },
-        {     id: 4,     name: "DualSense PS5 White",     category: "ACCESSORIES",     price: "245 TND",     image: "https://m.media-amazon.com/images/I/612bjwBuobS._AC_SL1500_.jpg",     desc: "Haptic Feedback (Retour haptique) Original" },
-        { id: 5,  name: "Xbox Series Controller",  category: "ACCESSORIES",  price: "220 TND",  image: "manxbox.webp",  desc: "Carbon Black Wireless - Compatible PC/Xbox" },
-        {  id: 6,  name: "Souris Gaming RGB", category: "GEAR", price: "85 TND", image: "sorie1.webp", desc: "Haute Précision pour Pro Gamers" },
-    
-        // --- 2. HEADSETS (سماعات) ---
-        { id: 6, name: "HyperX Cloud II", category: "AUDIO", price: "320 TND", image: "HyperX Cloud II.webp", desc: "7.1 Virtual Surround Sound" },
-        { id: 7, name: "Logitech G733 RGB", category: "AUDIO", price: "480 TND", image: "Logitech G733 RGB.webp", desc: "Lightspeed Wireless Gaming" },
-        { id: 8, name: "Razer BlackShark V2", category: "AUDIO", price: "340 TND", image: "Razer BlackShark V2.WEBP", desc: "Titanium 50mm Drivers" },
-        { id: 9, name: "SteelSeries Arctis 7", category: "AUDIO", price: "550 TND", image: "SteelSeries Arctis 7.WEBP", desc: "Lossless Wireless Audio" },
-    
-        // --- 3. SPEAKERS (بافل) ---
-        { id: 12, name: "Razer Nommo Pro", category: "AUDIO", price: "900 TND", image: "Razer Nommo Pro.JPEG", desc: "THX Certified 2.1 Audio" },
-        { id: 13, name: "Redragon GS520", category: "AUDIO", price: "95 TND", image: "Redragon GS520.JPEG", desc: "RGB Desktop Speakers" },
-        { id: 14, name: "Creative Pebble V3", category: "AUDIO", price: "140 TND", image: "Creative Pebble V3.JPEG", desc: "USB-C Powered 2.0 Speakers" },
-    
-        // --- 4. MOUSEPADS (تجهيزات السطح) ---
-        { id: 15, name: "Razer Goliathus Extended", category: "GEAR", price: "150 TND", image: "Razer Goliathus Extended.jpeg", desc: "Chroma RGB Mouse Mat" },
-        { id: 16, name: "SteelSeries QcK XXL", category: "GEAR", price: "110 TND", image: "SteelSeries QcK XXL.JPEG", desc: "Professional Cloth Pad" },
-        { id: 17, name: "Corsair MM300", category: "GEAR", price: "85 TND", image: "Corsair MM300.JPEG", desc: "High-Endurance Fabric" },
-        { id: 18, name: "Logitech G840 XL", category: "GEAR", price: "170 TND", image: "Logitech G840 XL.JPEG", desc: "KDA Edition Large Pad" },
-        { id: 26, name: "PS4 Vertical Stand", category: "ACCESSORIES", price: "45 TND", image: "PS4 Vertical Stand.jpeg", desc: "Cooling & Charging Station" },
-       
-    ];
-    
-    // وظيفة عرض المنتجات في الصفحة
-    function renderShop() {
-        const productList = document.getElementById('product-list');
-        productList.innerHTML = ""; // مسح المنتجات القديمة
-    
-        products.forEach(item => {
-            productList.innerHTML += `
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="${item.image}" alt="${item.name}">
-                    </div>
-                    <div class="product-info">
-                        <span class="category">${item.category}</span>
-                        <h3>${item.name}</h3>
-                        <p>${item.desc}</p>
-                        <div class="price-row">
-                            <span class="price">${item.price}</span>
-                            <button class="add-btn">+ Add</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-    }
-    
-    // تشغيل الوظيفة عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', renderShop);
-    
-    // 2. إدارة سلة المشتريات
-    let cart = [];
-    const cartBadge = document.querySelector('.cart-icon .count');
-    
-    // 3. وظيفة عرض المنتجات في الصفحة
-    function displayProducts() {
-        const productList = document.getElementById('product-list');
-        
-        // تفريغ المحتوى الحالي (إن وجد)
-        productList.innerHTML = "";
-    
-        products.forEach(product => {
-            const productHTML = `
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="${product.image}" alt="${product.name}">
-                    </div>
-                    <div class="product-info">
-                        <span class="category-tag">${product.category}</span>
-                        <h3>${product.name}</h3>
-                        <p class="specs">${product.specs}</p>
-                        <div class="price-row">
-                            <span class="price">${product.price} €</span>
-                            <button onclick="addToCart(${product.id})" class="add-btn">
-                                <i class="fas fa-plus"></i> Add
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            productList.innerHTML += productHTML;
-        });
-    }
-    
-    // 4. وظيفة الإضافة للسلة
-    window.addToCart = function(productId) {
-        const product = products.find(p => p.id === productId);
-        cart.push(product);
-        
-        // تحديث الرقم في السلة
-        cartBadge.innerText = cart.length;
-        
-        // تأثير بصري بسيط
-        alert(`${product.name} ajouté au panier !`);
-    };
-    
-    // 5. تشغيل الوظائف عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', () => {
-        displayProducts();
-        
-        // تأثير الـ Header عند التمرير (Sticky Scroll)
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.main-header');
-            if (window.scrollY > 50) {
-                header.style.padding = "10px 0";
-                header.style.background = "rgba(10, 10, 12, 0.98)";
-            } else {
-                header.style.padding = "20px 0";
-            }
-        });
-    });
-    // البحث الفوري عن المنتجات
-    const searchInput = document.querySelector('.search-bar input');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
+    <div class="cart-footer">
+        <div class="total-info">
+            <span>TOTAL À PAYER:</span>
+            <span id="total-amount">0.000 TND</span>
+        </div>
+        <a href="checkout.html" class="checkout-btn">Passer à la Caisse <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <script>
+        // مصفوفة المنتجات - تم تحويل السعر إلى أرقام لضمان عمل العمليات الحسابية
+        const products = [
+            { id: 1, name: "PS4 Slim 500GB", category: "CONSOLES", price: 850, image: "ps4.webp", desc: "Console Noire + 1 Manette DualShock 4 (État Propre)" },
+            { id: 2, name: "PS3 Super Slim", category: "CONSOLES", price: 380, image: "ps3.webp", desc: "Système Classique 250GB + Jeux Installés"},
+            { id: 3, name: "DualShock 4 Black", category: "ACCESSORIES", price: 165, image: "man4.webp", desc: "Manette Sans Fil Originale v2" },
+            { id: 4, name: "DualSense PS5 White", category: "ACCESSORIES", price: 245, image: "https://m.media-amazon.com/images/I/612bjwBuobS._AC_SL1500_.jpg", desc: "Haptic Feedback (Retour haptique) Original" },
+            { id: 5, name: "Xbox Series Controller", category: "ACCESSORIES", price: 220, image: "manxbox.webp", desc: "Carbon Black Wireless - Compatible PC/Xbox" },
+            { id: 6, name: "Souris Gaming RGB", category: "GEAR", price: 85, image: "sorie1.webp", desc: "Haute Précision pour Pro Gamers" },
+            { id: 7, name: "HyperX Cloud II", category: "AUDIO", price: 320, image: "HyperX Cloud II.webp", desc: "7.1 Virtual Surround Sound" },
+            { id: 8, name: "Logitech G733 RGB", category: "AUDIO", price: 480, image: "Logitech G733 RGB.webp", desc: "Lightspeed Wireless Gaming" },
+            { id: 9, name: "Razer BlackShark V2", category: "AUDIO", price: 340, image: "Razer BlackShark V2.WEBP", desc: "Titanium 50mm Drivers" },
+            { id: 10, name: "SteelSeries Arctis 7", category: "AUDIO", price: 550, image: "SteelSeries Arctis 7.WEBP", desc: "Lossless Wireless Audio" },
+            { id: 11, name: "Razer Nommo Pro", category: "AUDIO", price: 900, image: "Razer Nommo Pro.JPEG", desc: "THX Certified 2.1 Audio" },
+            { id: 12, name: "Redragon GS520", category: "AUDIO", price: 95, image: "Redragon GS520.JPEG", desc: "RGB Desktop Speakers" },
+            { id: 13, name: "Creative Pebble V3", category: "AUDIO", price: 140, image: "Creative Pebble V3.JPEG", desc: "USB-C Powered 2.0 Speakers" },
+            { id: 14, name: "Razer Goliathus Extended", category: "GEAR", price: 150, image: "Razer Goliathus Extended.jpeg", desc: "Chroma RGB Mouse Mat" },
+            { id: 15, name: "SteelSeries QcK XXL", category: "GEAR", price: 110, image: "SteelSeries QcK XXL.JPEG", desc: "Professional Cloth Pad" },
+            { id: 16, name: "Corsair MM300", category: "GEAR", price: 85, image: "Corsair MM300.JPEG", desc: "High-Endurance Fabric" },
+            { id: 17, name: "Logitech G840 XL", category: "GEAR", price: 170, image: "Logitech G840 XL.JPEG", desc: "KDA Edition Large Pad" },
+            { id: 18, name: "PS4 Vertical Stand", category: "ACCESSORIES", price: 45, image: "PS4 Vertical Stand.jpeg", desc: "Cooling & Charging Station" }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('userCart')) || [];
+        let currentFilter = 'ALL';
+        let currentSort = 'default';
+
+        const productListContainer = document.getElementById('product-list');
+        const cartCountDisplay = document.getElementById('cart-count');
+        const totalAmountDisplay = document.getElementById('total-amount');
+
+        // دالة عرض المنتجات
+        function renderUI(items) {
+            productListContainer.innerHTML = '';
+            document.getElementById('product-count').innerText = items.length;
             
-            // تصفية المنتجات بناءً على الاسم أو الفئة
-            const filteredProducts = products.filter(product => {
-                return product.name.toLowerCase().includes(searchTerm) || 
-                       product.category.toLowerCase().includes(searchTerm);
-            });
-    
-            // إعادة عرض المنتجات المصفاة فقط
-            renderFilteredProducts(filteredProducts);
-        });
-    }
-    
-    function renderFilteredProducts(filteredList) {
-        const productList = document.getElementById('product-list') || document.getElementById('shop-grid');
-        if (!productList) return;
-    
-        productList.innerHTML = "";
-        
-        if (filteredList.length === 0) {
-            productList.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-gray);">Aucun produit trouvé... 🔍</p>`;
-            return;
-        }
-    
-        filteredList.forEach(product => {
-            // نستخدم نفس كود عرض البطاقة الذي كتبناه سابقاً
-            productList.innerHTML += `
-                <div class="product-card">
-                    <div class="product-img"><img src="${product.image}"></div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <div class="price-row">
-                            <span class="price">${product.price} €</span>
-                            <button onclick="addToCart(${product.id})" class="add-btn">Add</button>
+            items.forEach(product => {
+                productListContainer.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-img">
+                            <img src="${product.image}" onerror="this.src='https://via.placeholder.com/300x200'">
                         </div>
-                    </div>
-                </div>`;
-        });
-    }
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200;
-    
-    counters.forEach(counter => {
-        const updateCount = () => {
-            const target = +counter.getAttribute('data-target');
-            const count = +counter.innerText;
-            const inc = target / speed;
-    
-            if (count < target) {
-                counter.innerText = Math.ceil(count + inc);
-                setTimeout(updateCount, 1);
-            } else {
-                counter.innerText = target;
+                        <div class="product-info">
+                            <span class="category-tag">${product.category}</span>
+                            <h3>${product.name}</h3>
+                            <p class="specs">${product.desc}</p>
+                            <div class="price-row">
+                                <span class="price">${product.price.toFixed(3)} TND</span>
+                                <button onclick="addToCart(${product.id})" class="add-btn">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        // إضافة للسلة
+        window.addToCart = function(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCartDisplay();
+            alert(product.name + " ajouté au panier!");
+        };
+
+        // مسح السلة
+        window.clearCart = function() {
+            if(confirm("Voulez-vous vraiment vider le panier?")) {
+                cart = [];
+                updateCartDisplay();
             }
         };
-        updateCount();
-    });</script>
+
+        // تحديث عرض السلة والمجموع
+        function updateCartDisplay() {
+            cartCountDisplay.innerText = cart.length;
+            const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+            const shippingFee = (cart.length > 0) ? 7 : 0;
+            const finalTotal = subtotal + shippingFee;
+            
+            totalAmountDisplay.innerText = finalTotal.toFixed(3) + " TND";
+            
+            localStorage.setItem('userCart', JSON.stringify(cart));
+            localStorage.setItem('totalPrice', finalTotal);
+        }
+
+        // تطبيق الفلترة والترتيب معاً
+        function applyAllFilters() {
+            let result = [...products];
+            
+            // 1. فلترة الفئة
+            if (currentFilter !== 'ALL') {
+                result = result.filter(p => p.category === currentFilter);
+            }
+
+            // 2. فلترة السعر
+            const maxPrice = document.getElementById('price-filter').value;
+            document.getElementById('price-val').innerText = maxPrice + " TND";
+            result = result.filter(p => p.price <= maxPrice);
+
+            // 3. الترتيب
+            if (currentSort === 'low') result.sort((a, b) => a.price - b.price);
+            if (currentSort === 'high') result.sort((a, b) => b.price - a.price);
+
+            renderUI(result);
+        }
+
+        // مستمعات الأحداث (Events)
+        const categoryBtns = document.querySelectorAll('.filter-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.getAttribute('data-cat');
+                applyAllFilters();
+            });
+        });
+
+        document.getElementById('price-filter').addEventListener('input', applyAllFilters);
+        
+        document.getElementById('sort-logic').addEventListener('change', (e) => {
+            currentSort = e.target.value;
+            applyAllFilters();
+        });
+
+        // تشغيل عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            applyAllFilters();
+            updateCartDisplay();
+        });
+    </script>
 </body>
 </html>

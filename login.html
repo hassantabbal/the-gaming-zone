@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | The Gaming Zone</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff0055;
+            --secondary-color: #00f2ff;
+            --bg-dark: #0a0a0c;
+            --card-bg: #161625;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0c 100%);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid #222;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            font-family: 'Orbitron';
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+        }
+
+        .login-header span { color: var(--primary-color); }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: #aaa;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+        }
+
+        input {
+            width: 100%;
+            background: #0d0d15;
+            border: 1px solid #333;
+            padding: 12px 12px 12px 45px;
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+        }
+
+        .btn-login {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Orbitron';
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background: #d00045;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .extra-links {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        .extra-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .back-home {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Retour</a>
+
+    <div class="login-card">
+        <div class="login-header">
+            <h2>ZONE <span>LOGIN</span></h2>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Nom d'utilisateur / Email</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Entrez votre nom" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-login">SE CONNECTER</button>
+        </form>
+
+        <div class="extra-links">
+            <p>Pas de compte ? <a href="#">S'inscrire</a></p>
+            <p><a href="#" style="font-size: 0.75rem; color: #777;">Mot de passe oublié ?</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // محاكاة تسجيل الدخول
+            alert("Connexion réussie !");
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

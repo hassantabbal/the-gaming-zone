@@ -61,27 +61,31 @@
             <nav class="nav-menu">
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
-                    <li><a href="pc-gaming.html">PC Gaming</a></li>
+                    <li><a href="shop.html">Shop</a></li>
                     <li><a href="consoles.html">Consoles</a></li>
                     <li><a href="gaming-gear.html">Gaming Gear</a></li>
                     <li><a href="support.html">Support</a></li>
+                    
                 </ul>
             </nav>
 
+            
             <div class="header-actions">
                 <div class="search-bar">
                     <input type="text" placeholder="Search gear...">
                     <button><i class="fas fa-search"></i></button>
                 </div>
-                <div class="cart-icon">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="count">0</span>
-                </div>
-                <div class="user-auth">
-                    <a href="#"><i class="far fa-user"></i> Login</a>
-                </div>
+                <a href="checkout.html" style="color: white; text-decoration: none;">
+                    <div class="cart-icon" style="cursor: pointer; position: relative;">
+                        <i class="fas fa-shopping-bag"></i> <span class="count" id="cart-count">0</span>
+                    </div>
+                </a>
+                <a href="login.html" class="login-link" style="margin-left: 15px; text-decoration: none; color: white;">
+                    <i class="fas fa-user"></i> Login
+                </a>
             </div>
         </div>
+        
     </header>
 
     <section class="gear-banner">
